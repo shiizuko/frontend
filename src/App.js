@@ -66,7 +66,7 @@ export default function App() {
   
     try {
       // Primeiro, faz o upload da imagem e obtém a URL combinada da imagem
-      const res = await fetch('http://localhost:5000/upload', {
+      const res = await fetch('http://3.145.20.161:5000/upload', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -126,7 +126,7 @@ export default function App() {
               <QRCode
             size={256}
             style={{ height: "250px", maxWidth: "250px", width: "250px" }}
-            value={`${window.location.href}/session/${sessionId}`} 
+            value={`${window.location.href}session/${sessionId}`} 
             viewBox={`0 0 256 256`}
           />
           </div>

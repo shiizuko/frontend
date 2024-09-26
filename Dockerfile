@@ -1,27 +1,22 @@
-# Etapa de build
-FROM node:18-alpine AS builder
-# Set the working directory in the container
-WORKDIR /usr/src/app/frontend
-
-# Copy package.json and package-lock.json to the container
+# Use an official Node runtime as a parent image
+FROM node:19-alpine as build
+# Set the working directory to /app
+WORKDIR /app
+# Copy the package.json and package-lock.json to the container
 COPY package*.json ./
-
-# Install frontend dependencies
+# Install dependencies
 RUN npm install
-
-# Copy the rest of the application files to the container
+# Copy the rest of the application code to the container
 COPY . .
-
-# Build the frontend app
+# Build the React app
 RUN npm run build
-
-# Use NGINX as a lightweight base image to serve the app
-FROM nginx:alpine
-
-# Copy the built app from the previous stage
-COPY --from=builder /usr/src/app/frontend/build /usr/share/nginx/html
-
-# Expose port 80 to the outside world (default for HTTP)
+# Use an official Nginx runtime as a parent image
+FROM nginx:1.21.0-alpine
+# Copy the ngnix.conf to the container
+COPY ngnix.conf /etc/nginx/conf.d/default.conf
+# Copy the React app build files to the container
+COPY - from=build /app/build /usr/share/nginx/html
+# Expose port 80 for Nginx
 EXPOSE 80
-
-# CMD is not needed as NGINX image has a default CMD to start the server
+# Start Nginx when the container starts
+CMD ["nginx", "-g", "daemon off;"]
