@@ -23,7 +23,7 @@ FROM nginx:alpine
 RUN rm /etc/nginx/conf.d/default.conf
 
 # Copiar a configuração customizada do Nginx
-COPY nginx.conf /etc/nginx/conf.d/
+COPY ./nginx.conf /etc/nginx/conf.d/
 
 # Copiar os arquivos estáticos construídos para o diretório que o Nginx usa para servir conteúdo
 COPY --from=builder /app/build /usr/share/nginx/html
