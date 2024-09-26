@@ -1,0 +1,11 @@
+.full-screen-bg {
+    min-height: 100vh; /* Garante que a altura mínima seja a altura da tela */
+    width: 100vw; /* Garante que a largura seja 100% da largura da tela */
+    background-size: cover; /* Faz com que a imagem cubra toda a área da div */
+    background-position: center; /* Centraliza a imagem de fundo */
+    background-repeat: no-repeat; /* Evita que a imagem se repita */
+    display: flex; /* Habilita Flexbox */
+    align-items: center; /* Centraliza o conteúdo verticalmente */
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+  }
+  
