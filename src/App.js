@@ -59,7 +59,8 @@ export default function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+    setIsButtonDisabled(true); 
+    setButtonText('Processando...');
     if (!age || !name || !causeOfDeath) {
       alert('Por favor, forneça seu nome, idade e causa da morte.');
       return;
@@ -97,8 +98,7 @@ export default function App() {
           alert('Ocorreu um erro ao atualizar a sessão.');
           return;
         }
-        setIsButtonDisabled(true); 
-        setButtonText('Processando...');
+        
         setStep(4); // Vai para o passo 4 (Obrigado)
       } else {
         alert(`Erro: ${result.error}`);
