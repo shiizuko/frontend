@@ -8,6 +8,7 @@ export default function App() {
   const [sessionId, setSessionId] = useState(null); // Armazena o ID da sessão
   const [isButtonDisabled, setIsButtonDisabled] = useState(false); 
   const [buttonText, setButtonText] = useState('Próximo');
+  const [isFullScreen, setIsFullScreen] = useState(false);
 
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
@@ -119,9 +120,32 @@ export default function App() {
     setButtonText('Próximo');
   };
 
+  const toggleFullScreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(err => {
+        alert(`Erro ao ativar o modo tela cheia: ${err.message}`);
+      });
+      setIsFullScreen(true);
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+        setIsFullScreen(false);
+      }
+    }
+  };
+  
+  
   return (
-    <div className='h-screen w-screen bg-center bg-contain bg-no-repeat flex items-center justify-center bg-[#14120F]' style={{ backgroundImage: "url('/background.png')" }}>
+    <div className='h-screen w-screen bg-center bg-contain bg-no-repeat flex items-center justify-center bg-[#14120F] overlay-hidden' style={{ backgroundImage: "url('/background.png')" }}>
       <img src="/logofanta.png" height={150} width={150} className='fixed top-0 mt-5 contain animate pop delay-1' alt='logo fanta'/>
+      <button 
+        onClick={toggleFullScreen} 
+        className={`fixed bottom-0 left-0 text-lg uppercase ${isFullScreen ? 'text-white/20 animate fade delay-1' : 'text-white animate-pulse '}`}
+      >
+        Tela <br/>Cheia
+      </button>
+
+
       {step === 1 && (
         <div className='text-white hover:text-[#71B876] items-center text-center'>
           <button onClick={handleStart} className='text-8xl uppercase mr-7 animate glow delay-2'>Iniciar</button>
@@ -161,13 +185,19 @@ export default function App() {
              <label className="text-xl uppercase block">Nome Completo</label>
             </div>
             <div className='animate fade delay-2'>
-              <input
-                type="number"
-                value={age}
-                onChange={(e) => setAge(e.target.value)}
-                required
-                className='text-white text-center text-2xl p-2 bg-[#14120F] outline-0'
-              />
+            <input
+              type="number"
+              value={age}
+              onChange={(e) => {
+                if (e.target.value.length <= 2) {
+                  setAge(e.target.value);
+                }
+              }}
+              maxLength="2"
+              required
+              className='text-white text-center text-2xl p-2 bg-[#14120F] outline-0'
+            />
+
               <img src="/deco.png" height={50} width={600} className='object-contain' alt=''/>
               <label className='text-xl uppercase block'>Idade</label>
             </div>
