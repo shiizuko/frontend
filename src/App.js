@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import QRCode from "react-qr-code";
+import "./App.css"
 
 export default function App() {
   const [step, setStep] = useState(1); // Controla o passo atual
@@ -111,46 +112,46 @@ export default function App() {
 
   return (
     <div className='h-screen w-screen bg-center bg-contain bg-no-repeat flex items-center justify-center bg-[#14120F]' style={{ backgroundImage: "url('/background.png')" }}>
-      <img src="/logofanta.png" height={240} width={240} className='fixed top-0 mt-5 contain' alt='logo fanta'/>
+      <img src="/logofanta.png" height={150} width={150} className='fixed top-0 mt-5 contain animate pop delay-1' alt='logo fanta'/>
       {step === 1 && (
         <div className='text-white hover:text-[#71B876] items-center text-center'>
-          <button onClick={handleStart} className='text-8xl uppercase mr-7'>Iniciar</button>
-          <img src="/deco.png" height={200} width={800} className='object-contain' alt=''/>
+          <button onClick={handleStart} className='text-8xl uppercase mr-7 animate glow delay-2'>Iniciar</button>
+          <img src="/deco.png" height={200} width={800} className='object-contain animate fade delay-3' alt=''/>
         </div>
       )}
       
       {step === 2 && (
         <div className='text-white text-center flex flex-col justify-center'>
           {sessionId && (
-            <div style={{ background: 'white', padding: '16px' }} className='items-center mx-auto'>
+            <div style={{ background: 'white', padding: '16px' }} className='items-center mx-auto mt-32 animate pop delay-1'>
               <QRCode
             size={256}
-            style={{ height: "250px", maxWidth: "250px", width: "250px" }}
+            style={{ height: "150px", maxWidth: "150px", width: "150px" }}
             value={`${window.location.href}session/${sessionId}`} 
             viewBox={`0 0 256 256`}
           />
           </div>
           )}
-          <button onClick={handleNext} className='mt-8 text-6xl hover:text-[#71B876]'>Próximo</button>
-          <img src="/deco.png" height={200} width={800} className='object-contain' alt=''/>
+          <button onClick={handleNext} className='mt-8 text-6xl hover:text-[#71B876] animate glow delay-2'>Próximo</button>
+          <img src="/deco.png" height={200} width={800} className='object-contain animate fade delay-3' alt=''/>
         </div>
       )}
       
       {step === 3 && (
         <div className='text-white text-center'>
-          <form onSubmit={handleSubmit} className='space-y-4 min-w-full mt-24 text-center items-center'>
-            <div>
+          <form onSubmit={handleSubmit} className='space-y-2 min-w-full mt-[5.8rem] text-center items-center'>
+            <div className='animate fade delay-1'>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                className='text-white text-center text-2xl p-2 bg-[#14120F] outline-0'
+                className='text-white text-center text-2xl p-2 bg-[#14120F] outline-0 '
               />
-             <img src="/deco.png" height={100} width={600} className='object-contain' alt=''/>
+             <img src="/deco.png" height={50} width={600} className='object-contain' alt=''/>
              <label className="text-xl uppercase block">Nome Completo</label>
             </div>
-            <div>
+            <div className='animate fade delay-2'>
               <input
                 type="number"
                 value={age}
@@ -158,10 +159,10 @@ export default function App() {
                 required
                 className='text-white text-center text-2xl p-2 bg-[#14120F] outline-0'
               />
-              <img src="/deco.png" height={100} width={600} className='object-contain' alt=''/>
+              <img src="/deco.png" height={50} width={600} className='object-contain' alt=''/>
               <label className='text-xl uppercase block'>Idade</label>
             </div>
-            <div>
+            <div className='animate fade delay-3'>
               <select
                 value={causeOfDeath}
                 onChange={(e) => setCauseOfDeath(e.target.value)}
@@ -175,11 +176,11 @@ export default function App() {
                 <option value="4">Morreu de esperar retornarem a mensagem</option>
                 <option value="5">Assustou-se com a própria sombra</option>
               </select>
-              <img src="/deco.png" height={100} width={600} className='object-contain' alt=''/>
-              <label className='text-xl uppercase block mb-12'>Causa da Morte</label>
+              <img src="/deco.png" height={50} width={600} className='object-contain' alt=''/>
+              <label className='text-xl uppercase block mb-2'>Causa da Morte</label>
             </div>
-            <button type="submit" className=' text-2xl hover:text-[#71B876] '>Próximo</button>
-            <img src="/deco.png" height={50} width={400} className='object-contain mx-auto items-center' alt=''/>
+            <button type="submit" className=' text-2xl hover:text-[#71B876] animate fade delay-5'>Próximo</button>
+            <img src="/deco.png" height={50} width={400} className='object-contain mx-auto items-center animate fade delay-6' alt=''/>
             
           </form>
         </div>
@@ -187,9 +188,9 @@ export default function App() {
       
       {step === 4 && (
         <div className='text-white text-center'>
-          <h1 className='text-7xl mb-5'>Obrigado por participar!</h1>
-          <button onClick={handleFinish} className='text-5xl hover:text-[#71B876] mt-32'>Finalizar</button>
-          <img src="/deco.png" height={200} width={800} className='object-contain' alt=''/>
+          <h1 className='text-7xl mb-5 animate pop delay-1'>Obrigado por participar!</h1>
+          <button onClick={handleFinish} className='text-5xl hover:text-[#71B876] mt-32 animate fade delay-2'>Finalizar</button>
+          <img src="/deco.png" height={200} width={800} className='object-contain animate fade delay-3' alt=''/>
 
         </div>
       )}
