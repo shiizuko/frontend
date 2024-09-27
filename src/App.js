@@ -75,7 +75,7 @@ export default function App() {
   
     try {
       // Primeiro, faz o upload da imagem e obtém a URL combinada da imagem
-      const res = await fetch('http://3.147.89.32:5000/upload', {
+      const res = await fetch('http://3.133.121.99:5000/upload', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
