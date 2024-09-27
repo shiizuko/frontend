@@ -6,6 +6,9 @@ import "./App.css"
 export default function App() {
   const [step, setStep] = useState(1); // Controla o passo atual
   const [sessionId, setSessionId] = useState(null); // Armazena o ID da sessão
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false); 
+  const [buttonText, setButtonText] = useState('Próximo');
+
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
   const [causeOfDeath, setCauseOfDeath] = useState(''); 
@@ -48,8 +51,11 @@ export default function App() {
   
 
   const handleNext = () => {
+
     setStep(3); // Vai para o passo 3 (Formulário)
   };
+
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -91,7 +97,8 @@ export default function App() {
           alert('Ocorreu um erro ao atualizar a sessão.');
           return;
         }
-  
+        setIsButtonDisabled(true); 
+        setButtonText('Processando...');
         setStep(4); // Vai para o passo 4 (Obrigado)
       } else {
         alert(`Erro: ${result.error}`);
@@ -108,6 +115,8 @@ export default function App() {
     setName('');
     setAge('');
     setCauseOfDeath('');
+    setIsButtonDisabled(false); 
+    setButtonText('Próximo');
   };
 
   return (
@@ -179,7 +188,7 @@ export default function App() {
               <img src="/deco.png" height={50} width={600} className='object-contain' alt=''/>
               <label className='text-xl uppercase block mb-2'>Causa da Morte</label>
             </div>
-            <button type="submit" className=' text-2xl hover:text-[#71B876] animate fade delay-5'>Próximo</button>
+            <button type="submit" className=' text-2xl hover:text-[#71B876] animate fade delay-5'  disabled={isButtonDisabled}>{buttonText}</button>
             <img src="/deco.png" height={50} width={400} className='object-contain mx-auto items-center animate fade delay-6' alt=''/>
             
           </form>
