@@ -75,7 +75,7 @@ export default function App() {
   
     try {
       // Primeiro, faz o upload da imagem e obtém a URL combinada da imagem
-      const res = await fetch('http://3.133.121.99:5000/upload', {
+      const res = await fetch('http://18.226.165.47:5000/upload', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -102,7 +102,7 @@ export default function App() {
         
         setStep(4); // Vai para o passo 4 (Obrigado)
       } else {
-        alert(`Erro: ${result.error}`);
+        alert(`Erro: ${result.error}`);  
       }
     } catch (err) {
       console.error('Erro inesperado:', err.message);
